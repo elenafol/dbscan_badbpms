@@ -1,0 +1,6 @@
+! At time null. 
+! OPTIC_ID 3887  
+! OPTIC_NAME R2017a_A40C40A10mL300_CTPPS2  
+! Used optic directory /afs/cern.ch/eng/lhc_online_model/opticsOP/2017/
+call, file = "/afs/cern.ch/eng/lhc_online_model/opticsOP/2017/strength/ats/low-beta/V2/ats_40cm_ctpps2.madx";
+call, file = "/afs/cern.ch/eng/lhc_online_model/opticsOP/2017/reset-bump-flags.madx";

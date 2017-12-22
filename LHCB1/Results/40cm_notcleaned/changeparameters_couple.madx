@@ -1,0 +1,4 @@
+! The applied model cut=0.150196323241
+b1_re_ip7_knob = b1_re_ip7_knob + 0.00240345595796;
+b1_im_ip7_knob = b1_im_ip7_knob + 0.00252040783524;
+return;

@@ -1,0 +1,43 @@
+__main__ - DEBUG - /afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/hole_in_one/hole_in_one.py --file=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250/Beam1@Turn@2017_09_11@19_02_33_250.sdds --model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat --outputdir=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250 clean --svd_mode=numpy --startturn=0 --endturn=50000 --sing_val=12 --pk-2-pk=0.00001 --max-peak-cut=20 --single_svd_bpm_threshold=0.925 --bad_bpms= --wrong_polarity_bpms= harpy --harpy_mode=svd --tunex=0.3 --tuney=0.332 --nattunex=0.310 --nattuney=0.320 --tunez=0.0 --tolerance=0.01 --tune_clean_limit=1e-5
+Utilities.tfs_pandas - DEBUG - Reading path: /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat
+Utilities.tfs_pandas - DEBUG - Setting column names.
+Utilities.tfs_pandas - DEBUG - Setting column types.
+clean - DEBUG - Flat BPMS detected (diff min/max <= 1e-05. BPMs removed: 14
+clean - DEBUG - Spikes > 20.0 detected. BPMs removed: 1
+clean - DEBUG - Exact zeros detected. BPMs removed: 24
+clean - DEBUG - Filtering done:
+clean - DEBUG - (Statistics for file reading) Total BPMs: 536, Good BPMs: 484 (90.30%), bad BPMs: 52 (9.70%)
+clean - DEBUG - Will resynchronize BPMs
+__main__ - DEBUG - Time for filtering: 0.243068933487
+clean - DEBUG - Using NumPy SVD
+clean - DEBUG - Amount of singular values to keep: 12
+clean - DEBUG - Bad BPMs from SVD detected. Number of BPMs removed: 4
+clean - DEBUG - Average BPM resolution: 0.107953360481
+clean - DEBUG - np.mean(np.std(A, axis=1): 0.23191275801
+__main__ - DEBUG - Time for SVD clean: 0.58904004097
+Utilities.tfs_pandas - DEBUG - Reading path: /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat
+Utilities.tfs_pandas - DEBUG - Setting column names.
+Utilities.tfs_pandas - DEBUG - Setting column types.
+clean - DEBUG - Flat BPMS detected (diff min/max <= 1e-05. BPMs removed: 14
+clean - DEBUG - Spikes > 20.0 detected. BPMs removed: 1
+clean - DEBUG - Exact zeros detected. BPMs removed: 22
+clean - DEBUG - Filtering done:
+clean - DEBUG - (Statistics for file reading) Total BPMs: 536, Good BPMs: 488 (91.04%), bad BPMs: 48 (8.96%)
+clean - DEBUG - Will resynchronize BPMs
+__main__ - DEBUG - Time for filtering: 0.243992805481
+clean - DEBUG - Using NumPy SVD
+clean - DEBUG - Amount of singular values to keep: 12
+clean - DEBUG - Bad BPMs from SVD detected. Number of BPMs removed: 2
+clean - DEBUG - Average BPM resolution: 0.108490666982
+clean - DEBUG - np.mean(np.std(A, axis=1): 0.250940461015
+__main__ - DEBUG - Time for SVD clean: 0.46697807312
+__main__ - DEBUG - Time for orbit_analysis: 0.0589869022369
+__main__ - DEBUG - Time for orbit_analysis: 0.054986000061
+__main__ - DEBUG - Time for harmonic_analysis: 6.91413879395e-06
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.linx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.ampsx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.freqsx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.liny in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.ampsy in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250.sdds.freqsy in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250
+__main__ - INFO - Total time for file: 58.7868030071

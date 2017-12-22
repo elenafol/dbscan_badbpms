@@ -1,0 +1,64 @@
+BPM.17L8.B1 Known bad BPM
+BPM.16L8.B1 Known bad BPM
+BPM.8R8.B1 Known bad BPM
+BPM.9R8.B1 Known bad BPM
+BPM.26L8.B1 Known bad BPM
+BPM.24L8.B1 Known bad BPM
+BPM.10R6.B1 Known bad BPM
+BPM.8R6.B1 Known bad BPM
+BPM.32R1.B1 Known bad BPM
+BPM.12R2.B1 Known bad BPM
+BPM.13R2.B1 Known bad BPM
+BPM.15R6.B1 Known bad BPM
+BPM.16R6.B1 Known bad BPM
+BPM.19L7.B1 Known bad BPM
+BPM.18L7.B1 Known bad BPM
+BPM.21R7.B1 Known bad BPM
+BPM.22R7.B1 Known bad BPM
+BPM.20R8.B1 Known bad BPM
+BPM.21R8.B1 Known bad BPM
+BPM.19L2.B1 Known bad BPM
+BPM.18L2.B1 Known bad BPM
+BPMR.7L5.B1 Known bad BPM
+BPM.6L5.B1 Known bad BPM
+BPM.8L1.B1 Known bad BPM
+BPM.6L1.B1 Known bad BPM
+BPM_A.7R3.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.18L5.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSY.4R5.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSX.B4L6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSX.A4L6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSI.A4R6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSI.B4R6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.9R6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.18R6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.28R6.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.8L7.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.8R7.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSX.4L8.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPM.28R8.B1 Flat BPM, the difference between min/max is smaller than 1e-05
+BPMSE.4L6.B1 Spiky BPM, found spike higher than 20.0
+BPMR.5R2.B1 Found an exact zero
+
+
+BPM.14L3.B1 Found an exact zero
+BPM_A.7R3.B1 Found an exact zero
+BPM.29R3.B1 Found an exact zero
+BPM.18L5.B1 Found an exact zero
+BPMSY.4R5.B1 Found an exact zero
+BPMSX.B4L6.B1 Found an exact zero
+BPMSX.A4L6.B1 Found an exact zero
+BPMSI.A4R6.B1 Found an exact zero
+BPMSI.B4R6.B1 Found an exact zero
+BPM.9R6.B1 Found an exact zero
+BPM.18R6.B1 Found an exact zero
+BPM.28R6.B1 Found an exact zero
+BPM.8L7.B1 Found an exact zero
+BPM.8R7.B1 Found an exact zero
+BPM.5L8.B1 Found an exact zero
+BPM.28R8.B1 Found an exact zero
+BPM.10L1.B1 Found an exact zero
+BPM.34R1.B1 Found an exact zero
+BPMS.2R5.B1 Detected from SVD, single peak value is greater then 0.925
+BPMWE.4R7.B1 Detected from SVD, single peak value is greater then 0.925
+BPM_A.7R1.B1 Detected from SVD, single peak value is greater then 0.925

@@ -1,0 +1,7 @@
+@ APP %le 0
+@ PATH %s /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_dbscan_after_holeInOneCleaning
+@ DATE %s Thu Dec 21 14:03:30 2017
+* NAME DELTA
+$ %s %le
+b1_re_ip7_knob   -0.00142886234857
+b1_im_ip7_knob   -0.0016252744946

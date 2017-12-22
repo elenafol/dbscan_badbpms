@@ -1,0 +1,44 @@
+2017-12-20#16-53-14:
+Name: GetLlm
+Command:
+/afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/GetLLM.py --accel=LHCB1 --model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat --files=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds --output=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned --tbtana=SUSSIX --bpmu=mm --lhcphase=1 --errordefs=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/error_deff.txt
+
+2017-12-20#16-53-33:
+Errors: Did not parse line ( "LHCB1$END" 23519.36962 0.3999991402 5.161352256e-06 0.3999855656 -2.551493119e-05 54.48172444 53.18831645 3.290403389e-07 0 2.109104239e-06 0 0 0 0 0 0 0 0 47.87975099 33.0951853 106.1509411 105.6578977 -3.858832908 6.500917874 "MARKER" 0 0 -0 -0 -0 -0 ) in  /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss_elements.dat
+Did not parse line ( "LHCB1$START" 23519.36962 0.3999991402 5.161352256e-06 0.3999855656 -2.551493119e-05 54.48172444 53.18831645 3.290403389e-07 0 2.109104239e-06 0 0 0 0 0 0 0 0 47.87975099 33.0951853 106.1509411 105.6578977 -3.858832908 6.500917874 "MARKER" 0 0 -0 -0 -0 -0 ) in  /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss_elements.dat
+/afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/core/_methods.py:59: RuntimeWarning: Mean of empty slice.
+  warnings.warn("Mean of empty slice.", RuntimeWarning)
+/afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/core/_methods.py:70: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+/afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/linalg/linalg.py:1776: RuntimeWarning: invalid value encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/helper.py:86: RuntimeWarning: divide by zero encountered in double_scalars
+  sigma = 0.5/np.abs(A12*cw+A34*cw1)*math.sqrt(np.abs((std*(2*np.abs(A12)**2*cw+cw1*(A12*np.conj(A34)+np.conj(A12)*A34)))**2+((std1*(2*np.abs(A34)**2*cw1+cw*(np.conj(A12)*A34+A12*np.conj(A34)))))**2))
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/helper.py:86: RuntimeWarning: invalid value encountered in double_scalars
+  sigma = 0.5/np.abs(A12*cw+A34*cw1)*math.sqrt(np.abs((std*(2*np.abs(A12)**2*cw+cw1*(A12*np.conj(A34)+np.conj(A12)*A34)))**2+((std1*(2*np.abs(A34)**2*cw1+cw*(np.conj(A12)*A34+A12*np.conj(A34)))))**2))
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:589: RuntimeWarning: divide by zero encountered in divide
+  f_old_out[bn1] = np.average(abs(f1001ij), weights=1/std_f1001ij**2)
+/afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/lib/function_base.py:961: RuntimeWarning: invalid value encountered in double_scalars
+  avg = np.multiply(a, wgt).sum(axis)/scl
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:594: RuntimeWarning: divide by zero encountered in divide
+  f1001i = np.average(f1001ij, weights=1/std_f1001ij**2)
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:595: RuntimeWarning: divide by zero encountered in divide
+  f1010i = np.average(f1010ij, weights=1/std_f1010ij**2)
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:597: RuntimeWarning: divide by zero encountered in divide
+  f1001istd = np.sqrt(1/sum(1/std_f1001ij**2))
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:598: RuntimeWarning: divide by zero encountered in divide
+  f1010istd = np.sqrt(1/sum(1/std_f1010ij**2))
+/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/algorithms/coupling.py:635: RuntimeWarning: divide by zero encountered in double_scalars
+  denom += 1/fwqw[bn2][0][1]**2 # denominator for weighted average
+
+
+2017-12-20#16-53-33:
+Name: CorrectCoupleDy
+Command:
+/afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/Correction/correct_coupleDy.py --accel=LHCB1 --path=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned --cut=0.01 --errorcut=0.02,0.02 --modelcut=0.0,0.01 --rpath=/afs/cern.ch/work/e/efol/public/Beta-Beat.src/ --MinStr=0.000001 --Dy=1,1,0,0,0 --opt=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/ --Variables=coupling_knobs
+
+2017-12-20#16-53-33:
+Errors: /afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/linalg/linalg.py:1776: RuntimeWarning: invalid value encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+
+

@@ -1,0 +1,22 @@
+2017-12-20#16-41-19:
+Name: SegmentBySegment
+Command:
+/afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/SegmentBySegment.py --accel=lhc --lhcmode=lhc_runII_2017 --beam=1 --start=IP1,IP2,IP5,IP8 --path=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned --twiss=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss_elements.dat --save=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned/sbs_auto --mad=/afs/cern.ch/group/si/slap/bin/madx --bbsource=/afs/cern.ch/work/e/efol/public/Beta-Beat.src/ --cuts=1.5
+
+2017-12-20#16-41-23:
+Errors: Traceback (most recent call last):
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/SegmentBySegment.py", line 1033, in <module>
+    return_value = main(_accel_cls, _options)
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/SegmentBySegment.py", line 194, in main
+    kmod_data_file_y)
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/SegmentBySegment.py", line 620, in getAndWriteData
+    save_path, beta_summary
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/sbs_writers/sbs_beta_writer.py", line 29, in write_beta
+    save_path, is_element, beta_summary_file)
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/sbs_writers/sbs_beta_writer.py", line 97, in _write_beta_for_plane
+    beta_end, err_beta_end, alfa_end, err_alfa_end) = _get_start_end_betas(bpms_list, measured_beta, plane)
+  File "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/SegmentBySegment/sbs_writers/sbs_beta_writer.py", line 218, in _get_start_end_betas
+    beta_end = getattr(measured_beta, "BET" + plane)[measured_beta.indx[last_bpm]]
+KeyError: 'DRIFT_0'
+
+

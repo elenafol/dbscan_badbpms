@@ -1,0 +1,12 @@
+@ GetLLMVersion %s "V3.0.0 Dev"
+@ Command %s "/afs/cern.ch/work/o/omc/anaconda/bin/python '/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/GetLLM.py' '--accel=LHCB1' '--model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat' '--files=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_dbscanOnCleaned/Beam1@Turn@2017_09_11@19_02_33_250_dbscanOnCleaned.sdds' '--output=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_dbscanOnCleanedData' '--tbtana=SUSSIX' '--bpmu=mm' '--lhcphase=1' '--errordefs=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/error_deff.txt'"
+@ CWD %s "/home/efol/Workspaces/Accsoft-Eclipse-Pro/lhc-app-beta-beating"
+@ Date %s "21. December 2017, 14:57:29"
+@ Threshold_for_abs(beta_d-beta_m)/beta_m %le 0.15
+@ Threshold_for_uncert(beta_d)/beta_d %le 0.15
+@ X_BPMs_Rejected %le 30
+@ Y_BPMs_Rejected %le 30
+@ FILES %s ""
+*             DPP                QX             QXRMS                QY             QYRMS             NATQX          NATQXRMS             NATQY          NATQYRMS           sqrt2JX        sqrt2JXSTD           sqrt2JY        sqrt2JYSTD               2JX            2JXSTD               2JY            2JYSTD
+$             %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le
+              0.0    0.299853391212 1.89027751939e-07    0.331421650847 3.08942333271e-08    0.300042659236 1.91262309197e-06    0.325798379473  0.00237308655536   0.0339202435826  0.00478790867346   0.0366444169782  0.00689624694418  0.00120681399137  0.00118798264352  0.00134319355837  0.00050057645433

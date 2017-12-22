@@ -1,0 +1,681 @@
+
+  ++++++++++++++++++++++++++++++++++++++++++++
+  +     MAD-X 5.02.13  (64 bit, Linux)       +
+  + Support: mad@cern.ch, http://cern.ch/mad +
+  + Release   date: 2016.12.20               +
+  + Execution date: 2017.12.21 13:49:07      +
+  ++++++++++++++++++++++++++++++++++++++++++++
+
+X:> X:> X:> X:> X:> ++++++ warning: macro redefined: coupling_knob
+++++++ warning: macro redefined: match_tunes
+X:> X:> X:> 
+
+!@require lhc_runII_ats
+
+!@require segments
+
+
+
+option, -echo;
+
+X:> ++++++ warning: implicit element re-definition ignored: ip1
+++++++ warning: implicit element re-definition ignored: mbas2.1r1
+++++++ warning: implicit element re-definition ignored: tas.1r1
+++++++ warning: implicit element re-definition ignored: bpmwk.1r1
+++++++ warning: implicit element re-definition ignored: mqxa.1r1
+++++++ warning: implicit element re-definition ignored: mcbxh.1r1
+++++++ warning: implicit element re-definition ignored: mcbxv.1r1
+++++++ warning: implicit element re-definition ignored: mqxb.a2r1
+++++++ warning: implicit element re-definition ignored: mcbxh.2r1
+++++++ warning: implicit element re-definition ignored: mcbxv.2r1
+++++++ warning: implicit element re-definition ignored: mqxb.b2r1
+++++++ warning: implicit element re-definition ignored: tasb.3r1
+++++++ warning: implicit element re-definition ignored: mqsx.3r1
+++++++ warning: implicit element re-definition ignored: mqxa.3r1
+++++++ warning: implicit element re-definition ignored: mcbxh.3r1
+++++++ warning: implicit element re-definition ignored: mcbxv.3r1
+++++++ warning: implicit element re-definition ignored: mcsx.3r1
+++++++ warning: implicit element re-definition ignored: mctx.3r1
+++++++ warning: implicit element re-definition ignored: mcosx.3r1
+++++++ warning: implicit element re-definition ignored: mcox.3r1
+++++++ warning: implicit element re-definition ignored: mcssx.3r1
+++++++ warning: implicit element re-definition ignored: dfbxb.3r1
+++++++ warning: implicit element re-definition ignored: mbxw.a4r1
+++++++ warning: implicit element re-definition ignored: mbxw.b4r1
+++++++ warning: implicit element re-definition ignored: mbxw.c4r1
+++++++ warning: implicit element re-definition ignored: mbxw.d4r1
+++++++ warning: implicit element re-definition ignored: mbxw.e4r1
+++++++ warning: implicit element re-definition ignored: mbxw.f4r1
+++++++ warning: implicit element re-definition ignored: x1fcr.4r1
+++++++ warning: implicit element re-definition ignored: brana.4r1
+++++++ warning: implicit element re-definition ignored: x1zdc.a4r1
+++++++ warning: implicit element re-definition ignored: tanar.4r1
+++++++ warning: implicit element re-definition ignored: x2zdc.4l2
+++++++ warning: implicit element re-definition ignored: branb.4l2
+++++++ warning: implicit element re-definition ignored: btvst.a4l2
+++++++ warning: implicit element re-definition ignored: tcdd.4l2
+++++++ warning: implicit element re-definition ignored: mbx.4l2
+++++++ warning: implicit element re-definition ignored: dfbxc.3l2
+++++++ warning: implicit element re-definition ignored: mcosx.3l2
+++++++ warning: implicit element re-definition ignored: mcox.3l2
+++++++ warning: implicit element re-definition ignored: mcssx.3l2
+++++++ warning: implicit element re-definition ignored: mcbxh.3l2
+++++++ warning: implicit element re-definition ignored: mcbxv.3l2
+++++++ warning: implicit element re-definition ignored: mcsx.3l2
+++++++ warning: implicit element re-definition ignored: mctx.3l2
+++++++ warning: implicit element re-definition ignored: mqxa.3l2
+++++++ warning: implicit element re-definition ignored: mqsx.3l2
+++++++ warning: implicit element re-definition ignored: mqxb.b2l2
+++++++ warning: implicit element re-definition ignored: mcbxh.2l2
+++++++ warning: implicit element re-definition ignored: mcbxv.2l2
+++++++ warning: implicit element re-definition ignored: mqxb.a2l2
+++++++ warning: implicit element re-definition ignored: mcbxh.1l2
+++++++ warning: implicit element re-definition ignored: mcbxv.1l2
+++++++ warning: implicit element re-definition ignored: mqxa.1l2
+++++++ warning: implicit element re-definition ignored: mbxwt.1l2
+++++++ warning: implicit element re-definition ignored: mbwmd.1l2
+++++++ warning: implicit element re-definition ignored: mbls2.1l2
+++++++ warning: implicit element re-definition ignored: ip2
+++++++ warning: implicit element re-definition ignored: mbls2.1r2
+++++++ warning: implicit element re-definition ignored: mbaw.1r2
+++++++ warning: implicit element re-definition ignored: mbxwt.1r2
+++++++ warning: implicit element re-definition ignored: mqxa.1r2
+++++++ warning: implicit element re-definition ignored: mcbxh.1r2
+++++++ warning: implicit element re-definition ignored: mcbxv.1r2
+++++++ warning: implicit element re-definition ignored: mqxb.a2r2
+++++++ warning: implicit element re-definition ignored: mcbxh.2r2
+++++++ warning: implicit element re-definition ignored: mcbxv.2r2
+++++++ warning: implicit element re-definition ignored: mqxb.b2r2
+++++++ warning: implicit element re-definition ignored: mqsx.3r2
+++++++ warning: implicit element re-definition ignored: mqxa.3r2
+++++++ warning: implicit element re-definition ignored: mcbxh.3r2
+++++++ warning: implicit element re-definition ignored: mcbxv.3r2
+++++++ warning: implicit element re-definition ignored: mcsx.3r2
+++++++ warning: implicit element re-definition ignored: mctx.3r2
+++++++ warning: implicit element re-definition ignored: mcosx.3r2
+++++++ warning: implicit element re-definition ignored: mcox.3r2
+++++++ warning: implicit element re-definition ignored: mcssx.3r2
+++++++ warning: implicit element re-definition ignored: dfbxd.3r2
+++++++ warning: implicit element re-definition ignored: mbx.4r2
+++++++ warning: implicit element re-definition ignored: tclia.4r2
+++++++ warning: implicit element re-definition ignored: branb.4r2
+++++++ warning: implicit element re-definition ignored: x2zdc.4r2
+++++++ warning: implicit element re-definition ignored: ip3
+++++++ warning: implicit element re-definition ignored: ip4
+++++++ warning: implicit element re-definition ignored: tanc.4l5
+++++++ warning: implicit element re-definition ignored: x5zdc.b4l5
+++++++ warning: implicit element re-definition ignored: brana.4l5
+++++++ warning: implicit element re-definition ignored: x5zdc.a4l5
+++++++ warning: implicit element re-definition ignored: x5fcb.a4l5
+++++++ warning: implicit element re-definition ignored: x5fca.b4l5
+++++++ warning: implicit element re-definition ignored: mbxw.f4l5
+++++++ warning: implicit element re-definition ignored: mbxw.e4l5
+++++++ warning: implicit element re-definition ignored: mbxw.d4l5
+++++++ warning: implicit element re-definition ignored: mbxw.c4l5
+++++++ warning: implicit element re-definition ignored: mbxw.b4l5
+++++++ warning: implicit element re-definition ignored: mbxw.a4l5
+++++++ warning: implicit element re-definition ignored: x5fca.a4l5
+++++++ warning: implicit element re-definition ignored: dfbxe.3l5
+++++++ warning: implicit element re-definition ignored: mcosx.3l5
+++++++ warning: implicit element re-definition ignored: mcox.3l5
+++++++ warning: implicit element re-definition ignored: mcssx.3l5
+++++++ warning: implicit element re-definition ignored: mcbxh.3l5
+++++++ warning: implicit element re-definition ignored: mcbxv.3l5
+++++++ warning: implicit element re-definition ignored: mcsx.3l5
+++++++ warning: implicit element re-definition ignored: mctx.3l5
+++++++ warning: implicit element re-definition ignored: mqxa.3l5
+++++++ warning: implicit element re-definition ignored: mqsx.3l5
+++++++ warning: implicit element re-definition ignored: tasb.3l5
+++++++ warning: implicit element re-definition ignored: mqxb.b2l5
+++++++ warning: implicit element re-definition ignored: mcbxh.2l5
+++++++ warning: implicit element re-definition ignored: mcbxv.2l5
+++++++ warning: implicit element re-definition ignored: mqxb.a2l5
+++++++ warning: implicit element re-definition ignored: mcbxh.1l5
+++++++ warning: implicit element re-definition ignored: mcbxv.1l5
+++++++ warning: implicit element re-definition ignored: mqxa.1l5
+++++++ warning: implicit element re-definition ignored: bpmwk.1l5
+++++++ warning: implicit element re-definition ignored: tas.1l5
+++++++ warning: implicit element re-definition ignored: mbcs2.1l5
+++++++ warning: implicit element re-definition ignored: ip5
+++++++ warning: implicit element re-definition ignored: mbcs2.1r5
+++++++ warning: implicit element re-definition ignored: tas.1r5
+++++++ warning: implicit element re-definition ignored: bpmwk.1r5
+++++++ warning: implicit element re-definition ignored: mqxa.1r5
+++++++ warning: implicit element re-definition ignored: mcbxh.1r5
+++++++ warning: implicit element re-definition ignored: mcbxv.1r5
+++++++ warning: implicit element re-definition ignored: mqxb.a2r5
+++++++ warning: implicit element re-definition ignored: mcbxh.2r5
+++++++ warning: implicit element re-definition ignored: mcbxv.2r5
+++++++ warning: implicit element re-definition ignored: mqxb.b2r5
+++++++ warning: implicit element re-definition ignored: tasb.3r5
+++++++ warning: implicit element re-definition ignored: mqsx.3r5
+++++++ warning: implicit element re-definition ignored: mqxa.3r5
+++++++ warning: implicit element re-definition ignored: mcbxh.3r5
+++++++ warning: implicit element re-definition ignored: mcbxv.3r5
+++++++ warning: implicit element re-definition ignored: mcsx.3r5
+++++++ warning: implicit element re-definition ignored: mctx.3r5
+++++++ warning: implicit element re-definition ignored: mcosx.3r5
+++++++ warning: implicit element re-definition ignored: mcox.3r5
+++++++ warning: implicit element re-definition ignored: mcssx.3r5
+++++++ warning: implicit element re-definition ignored: dfbxf.3r5
+++++++ warning: implicit element re-definition ignored: x5fca.b4r5
+++++++ warning: implicit element re-definition ignored: mbxw.a4r5
+++++++ warning: implicit element re-definition ignored: mbxw.b4r5
+++++++ warning: implicit element re-definition ignored: mbxw.c4r5
+++++++ warning: implicit element re-definition ignored: mbxw.d4r5
+++++++ warning: implicit element re-definition ignored: mbxw.e4r5
+++++++ warning: implicit element re-definition ignored: mbxw.f4r5
+++++++ warning: implicit element re-definition ignored: x5fca.a4r5
+++++++ warning: implicit element re-definition ignored: x5fcb.a4r5
+++++++ warning: implicit element re-definition ignored: x5zdc.b4r5
+++++++ warning: implicit element re-definition ignored: brana.4r5
+++++++ warning: implicit element re-definition ignored: x5zdc.a4r5
+++++++ warning: implicit element re-definition ignored: tanc.4r5
+++++++ warning: implicit element re-definition ignored: ip6
+++++++ warning: implicit element re-definition ignored: ip7
+++++++ warning: implicit element re-definition ignored: branb.4l8
+++++++ warning: implicit element re-definition ignored: tclia.4l8
+++++++ warning: implicit element re-definition ignored: mbx.4l8
+++++++ warning: implicit element re-definition ignored: dfbxg.3l8
+++++++ warning: implicit element re-definition ignored: mcosx.3l8
+++++++ warning: implicit element re-definition ignored: mcox.3l8
+++++++ warning: implicit element re-definition ignored: mcssx.3l8
+++++++ warning: implicit element re-definition ignored: mcbxh.3l8
+++++++ warning: implicit element re-definition ignored: mcbxv.3l8
+++++++ warning: implicit element re-definition ignored: mcsx.3l8
+++++++ warning: implicit element re-definition ignored: mctx.3l8
+++++++ warning: implicit element re-definition ignored: mqxa.3l8
+++++++ warning: implicit element re-definition ignored: mqsx.3l8
+++++++ warning: implicit element re-definition ignored: mqxb.b2l8
+++++++ warning: implicit element re-definition ignored: mcbxh.2l8
+++++++ warning: implicit element re-definition ignored: mcbxv.2l8
+++++++ warning: implicit element re-definition ignored: mqxb.a2l8
+++++++ warning: implicit element re-definition ignored: mcbxh.1l8
+++++++ warning: implicit element re-definition ignored: mcbxv.1l8
+++++++ warning: implicit element re-definition ignored: mqxa.1l8
+++++++ warning: implicit element re-definition ignored: mbxws.1l8
+++++++ warning: implicit element re-definition ignored: mbxwh.1l8
+++++++ warning: implicit element re-definition ignored: ip8
+++++++ warning: implicit element re-definition ignored: mblw.1r8
+++++++ warning: implicit element re-definition ignored: mbxws.1r8
+++++++ warning: implicit element re-definition ignored: mqxa.1r8
+++++++ warning: implicit element re-definition ignored: mcbxh.1r8
+++++++ warning: implicit element re-definition ignored: mcbxv.1r8
+++++++ warning: implicit element re-definition ignored: mqxb.a2r8
+++++++ warning: implicit element re-definition ignored: mcbxh.2r8
+++++++ warning: implicit element re-definition ignored: mcbxv.2r8
+++++++ warning: implicit element re-definition ignored: mqxb.b2r8
+++++++ warning: implicit element re-definition ignored: mqsx.3r8
+++++++ warning: implicit element re-definition ignored: mqxa.3r8
+++++++ warning: implicit element re-definition ignored: mcbxh.3r8
+++++++ warning: implicit element re-definition ignored: mcbxv.3r8
+++++++ warning: implicit element re-definition ignored: mcsx.3r8
+++++++ warning: implicit element re-definition ignored: mctx.3r8
+++++++ warning: implicit element re-definition ignored: mcosx.3r8
+++++++ warning: implicit element re-definition ignored: mcox.3r8
+++++++ warning: implicit element re-definition ignored: mcssx.3r8
+++++++ warning: implicit element re-definition ignored: dfbxh.3r8
+++++++ warning: implicit element re-definition ignored: mbx.4r8
+++++++ warning: implicit element re-definition ignored: tcddm.4r8
+++++++ warning: implicit element re-definition ignored: btvst.a4r8
+++++++ warning: implicit element re-definition ignored: branb.4r8
+++++++ warning: implicit element re-definition ignored: tanal.4l1
+++++++ warning: implicit element re-definition ignored: x1zdc.a4l1
+++++++ warning: implicit element re-definition ignored: brana.4l1
+++++++ warning: implicit element re-definition ignored: x1fcl.4l1
+++++++ warning: implicit element re-definition ignored: mbxw.f4l1
+++++++ warning: implicit element re-definition ignored: mbxw.e4l1
+++++++ warning: implicit element re-definition ignored: mbxw.d4l1
+++++++ warning: implicit element re-definition ignored: mbxw.c4l1
+++++++ warning: implicit element re-definition ignored: mbxw.b4l1
+++++++ warning: implicit element re-definition ignored: mbxw.a4l1
+++++++ warning: implicit element re-definition ignored: dfbxa.3l1
+++++++ warning: implicit element re-definition ignored: mcosx.3l1
+++++++ warning: implicit element re-definition ignored: mcox.3l1
+++++++ warning: implicit element re-definition ignored: mcssx.3l1
+++++++ warning: implicit element re-definition ignored: mcbxh.3l1
+++++++ warning: implicit element re-definition ignored: mcbxv.3l1
+++++++ warning: implicit element re-definition ignored: mcsx.3l1
+++++++ warning: implicit element re-definition ignored: mctx.3l1
+++++++ warning: implicit element re-definition ignored: mqxa.3l1
+++++++ warning: implicit element re-definition ignored: mqsx.3l1
+++++++ warning: implicit element re-definition ignored: tasb.3l1
+++++++ warning: implicit element re-definition ignored: mqxb.b2l1
+++++++ warning: implicit element re-definition ignored: mcbxh.2l1
+++++++ warning: implicit element re-definition ignored: mcbxv.2l1
+++++++ warning: implicit element re-definition ignored: mqxb.a2l1
+++++++ warning: implicit element re-definition ignored: mcbxh.1l1
+++++++ warning: implicit element re-definition ignored: mcbxv.1l1
+++++++ warning: implicit element re-definition ignored: mqxa.1l1
+++++++ warning: implicit element re-definition ignored: bpmwk.1l1
+++++++ warning: implicit element re-definition ignored: tas.1l1
+++++++ warning: implicit element re-definition ignored: mbas2.1l1
+++++++ warning: implicit element re-definition ignored: ip1.l1
+X:> X:> ++++++ info: on_x1 redefined
+++++++ info: on_x2 redefined
+++++++ info: on_x5 redefined
+++++++ info: on_x8 redefined
+++++++ info: on_sep1 redefined
+++++++ info: on_sep2 redefined
+++++++ info: on_sep5 redefined
+++++++ info: on_sep8 redefined
+++++++ info: on_o2 redefined
+++++++ info: on_o8 redefined
+++++++ info: on_oh1 redefined
+++++++ info: on_ov1 redefined
+++++++ info: on_oh5 redefined
+++++++ info: on_ov5 redefined
+++++++ info: on_a2 redefined
+++++++ info: on_a8 redefined
+++++++ info: nrj redefined
+++++++ info: on_alice redefined
+++++++ info: on_lhcb redefined
+X:> ++++++ info: on_x1 redefined
+++++++ info: on_sep1 redefined
+++++++ info: on_o1 redefined
+++++++ info: on_oh1 redefined
+++++++ info: on_ov1 redefined
+++++++ info: on_x2 redefined
+++++++ info: on_sep2 redefined
+++++++ info: on_o2 redefined
+++++++ info: on_a2 redefined
+++++++ info: on_oe2 redefined
+++++++ info: on_ov2 redefined
+++++++ info: on_x5 redefined
+++++++ info: on_sep5 redefined
+++++++ info: on_o5 redefined
+++++++ info: on_oh5 redefined
+++++++ info: on_ov5 redefined
+++++++ info: on_x8 redefined
+++++++ info: on_sep8 redefined
+++++++ info: on_o8 redefined
+++++++ info: on_a8 redefined
+++++++ info: on_alice redefined
+++++++ info: on_lhcb redefined
+++++++ info: on_sol_atlas redefined
+++++++ info: on_sol_alice redefined
+++++++ info: on_sol_cms redefined
+X:> X:> X:> X:> ++++++ info: seqedit - number of elements installed:  0
+++++++ info: seqedit - number of elements moved:      0
+++++++ info: seqedit - number of elements removed:    0
+++++++ info: seqedit - number of elements replaced:   0
+X:> X:> X:> 
+
+twiss;
+
+enter Twiss module
+  
+iteration:   1 error:   0.000000E+00 deltap:   0.000000E+00
+orbit:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+        26658.8832                 -0    0.0003483075245        53.58195702 
+
+                q1                dq1            betxmax              dxmax 
+             62.31        2.000004327        6019.830028        2.861364348 
+
+             dxrms             xcomax             xcorms                 q2 
+        1.49903144                  0                  0              60.32 
+
+               dq2            betymax              dymax              dyrms 
+       2.000004326         6019.83003                 -0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0                  0 
+
+           synch_2            synch_3            synch_4            synch_5 
+                 0                  0                  0                  0 
+
+            nflips 
+                 0 
+X:> 
+
+exec, save_initial_and_final_values(
+
+    LHCB1,
+
+    BPMWB.4L1.B1,
+
+    BPMS.2R1.B1,
+
+    "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//measurement_IP1.madx",
+
+    biniLHCB1,
+
+    bendLHCB1
+
+);
+
+dy_end = 0;
+
+alfx_end = -36.3442892964;
+
+wy_end = 0.0;
+
+bety_ini = 1715.29390742;
+
+alfy_end = 157.112946087;
+
+phiy_end = 0.0;
+
+betx_end = 1772.56977731;
+
+end_r12 = -951.606284333;
+
+dpy_end = 0;
+
+alfx_ini = -3.93722715113;
+
+betx_ini = 1100.93569511;
+
+alfy_ini = -22.8255599464;
+
+phiy_ini = 0.0;
+
+wx_end = 0.0;
+
+ini_r11 = 0.472296468268;
+
+ini_r12 = 79.4438866865;
+
+bety_end = 3169.26912854;
+
+end_r21 = -0.615905123152;
+
+end_r11 = 12.3951187068;
+
+wx_ini = 0.0;
+
+phix_end = 0.0;
+
+end_r22 = 47.2235089089;
+
+wy_ini = 0.0;
+
+dpy_ini = 0;
+
+ini_r21 = 0.00605090694431;
+
+ini_r22 = 1.08837193734;
+
+dx_ini = 0;
+
+dx_end = 0;
+
+dy_ini = 0;
+
+phix_ini = 0.0;
+
+dpx_end = 0;
+
+dpx_ini = 0;
+
+enter Twiss module
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+                 0                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+                 0                  0        1100.935695                  0 
+
+             dxrms             xcomax             xcorms                 q2 
+                 0                  0                  0                  0 
+
+               dq2            betymax              dymax              dyrms 
+                 0        1715.293907                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0                  0 
+
+           synch_2            synch_3            synch_4            synch_5 
+                 0                  0                  0                  0 
+
+            nflips 
+                 0 
+enter Twiss module
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+                 0                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+                 0                  0        1772.569777                  0 
+
+             dxrms             xcomax             xcorms                 q2 
+                 0                  0                  0                  0 
+
+               dq2            betymax              dymax              dyrms 
+                 0        3169.269129                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0                  0 
+
+           synch_2            synch_3            synch_4            synch_5 
+                 0                  0                  0                  0 
+
+            nflips 
+                 0 
+X:> 
+
+exec, extract_segment_sequence(
+
+    LHCB1,
+
+    front_LHCB1, back_LHCB1,
+
+    BPMWB.4L1.B1, BPMS.2R1.B1
+
+);
+
+++++++ info: seqedit - number of elements installed:  0
+++++++ info: seqedit - number of elements moved:      0
+++++++ info: seqedit - number of elements removed:    0
+++++++ info: seqedit - number of elements replaced:   0
++++ extracting sequence lhcb1 from bpmwb.4l1.b1:1 to bpms.2r1.b1:1
++++ new sequence: front_lhcb1  with current length = 182.6235
+
+++++++ info: seqedit - number of elements installed:  0
+++++++ info: seqedit - number of elements moved:      0
+++++++ info: seqedit - number of elements removed:    0
+++++++ info: seqedit - number of elements replaced:   0
++++ extracting sequence lhcb1 from bpmwb.4l1.b1:1 to bpms.2r1.b1:1
++++ new sequence: back_lhcb1  with current length = 182.6235
+
+++++++ info: seqedit - number of elements installed:  0
+++++++ info: seqedit - number of elements moved:      0
+++++++ info: seqedit - number of elements removed:    0
+++++++ info: seqedit - number of elements replaced:   0
+X:> exec, beam_LHCB1(front_LHCB1);
+
+X:> exec, beam_LHCB1(back_LHCB1);
+
+X:> 
+
+
+
+exec, twiss_segment(front_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//twiss_IP1.dat", biniLHCB1);
+
+enter Twiss module
+ Found 6 initial orbit vector values from twiss command. 
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     2.518589E-08 -1.795825E-09  0.000000E+00  0.000000E+00 -7.939429E-10  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+          182.6235                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+      0.5064814442     -0.02977722424        4718.051148      0.04881043582 
+
+             dxrms             xcomax             xcorms                 q2 
+     0.02704390519                  0                  0       0.5025017246 
+
+               dq2            betymax              dymax              dyrms 
+    -0.00611690143        9086.512147                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0    5.407422543e-06 
+
+           synch_2            synch_3            synch_4            synch_5 
+   6.248778969e-08    3.458419418e-12     -1.8438974e-16    2.623588523e-15 
+
+            nflips 
+                 0 
+X:> exec, twiss_segment(back_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//twiss_IP1_back.dat", bendLHCB1);
+
+enter Twiss module
+ Found 6 initial orbit vector values from twiss command. 
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     8.931613E-08  1.129048E-09  0.000000E+00  0.000000E+00 -8.844018E-10  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+          182.6235                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+      0.5035073214     -0.07829311166        4879.653542      0.08931641237 
+
+             dxrms             xcomax             xcorms                 q2 
+     0.04041151016                  0                  0       0.5021839146 
+
+               dq2            betymax              dymax              dyrms 
+   -0.009723962524        4971.022101                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0    5.407422543e-06 
+
+           synch_2            synch_3            synch_4            synch_5 
+   6.248778969e-08    3.458419418e-12     -1.8438974e-16    3.332411734e-15 
+
+            nflips 
+                 0 
+X:> 
+
+call, file="/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//corrections_IP1.madx";
+
+! kqx.l1
+
+! kqsx3.l1
+
+! ktqx2.l1
+
+! ktqx1.l1
+
+! kqx.r1
+
+! ktqx1.r1
+
+X:> 
+
+exec, twiss_segment(front_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//twiss_IP1_cor.dat", biniLHCB1);
+
+enter Twiss module
+ Found 6 initial orbit vector values from twiss command. 
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     2.518589E-08 -1.795825E-09  0.000000E+00  0.000000E+00 -5.922578E-10  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+          182.6235                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+      0.5064814442     -0.02977722424        4718.051148      0.04881043582 
+
+             dxrms             xcomax             xcorms                 q2 
+     0.02704390519                  0                  0       0.5025017246 
+
+               dq2            betymax              dymax              dyrms 
+    -0.00611690143        9086.512147                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0    5.407422543e-06 
+
+           synch_2            synch_3            synch_4            synch_5 
+   6.248778969e-08    3.458419418e-12     -1.8438974e-16    2.623588523e-15 
+
+            nflips 
+                 0 
+X:> exec, twiss_segment(back_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned_arcs_with_dbscan_only/sbs_auto//twiss_IP1_cor_back.dat", bendLHCB1);
+
+enter Twiss module
+ Found 6 initial orbit vector values from twiss command. 
+  
+open line - error with deltap:   1.000000E-06
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     8.931613E-08  1.129048E-09  0.000000E+00  0.000000E+00 -8.844018E-10  0.000000E+00
+  
+open line - error with deltap:   0.000000E+00
+initial orbit vector:   0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+final orbit vector:     0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00
+
+++++++ table: summ
+
+            length             orbit5               alfa            gammatr 
+          182.6235                 -0                  0                  0 
+
+                q1                dq1            betxmax              dxmax 
+      0.5035073214     -0.07829311166        4879.653542      0.08931641237 
+
+             dxrms             xcomax             xcorms                 q2 
+     0.04041151016                  0                  0       0.5021839146 
+
+               dq2            betymax              dymax              dyrms 
+   -0.009723962524        4971.022101                  0                  0 
+
+            ycomax             ycorms             deltap            synch_1 
+                 0                  0                  0    5.407422543e-06 
+
+           synch_2            synch_3            synch_4            synch_5 
+   6.248778969e-08    3.458419418e-12     -1.8438974e-16    3.332411734e-15 
+
+            nflips 
+                 0 
+X:> 
+  Number of warnings: 235
+235 in C and 0 in Fortran
+
+  ++++++++++++++++++++++++++++++++++++++++++++
+  +          MAD-X finished normally         +
+  ++++++++++++++++++++++++++++++++++++++++++++

@@ -1,0 +1,57 @@
+option, -echo;
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/madx/lib/beta_beat.macros.madx";
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/madx/lib/lhc.macros.madx";
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/madx/lib/lhc_runII.macros.madx";
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/madx/lib/lhc_runII_ats.macros.madx";
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/madx/lib/segments.macros.madx";
+option, echo;
+
+!@require lhc_runII_ats
+!@require segments
+
+option, -echo;
+
+call, file = "/afs/cern.ch/work/e/efol/public/Beta-Beat.src/model/accelerators/lhc/2017/main.seq";
+
+exec, define_nominal_beams();
+call, file = "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto/modifiers.madx";
+exec, set_default_crossing_scheme();
+
+! Cycle the sequence in the start point to
+! avoid negative length sequence.
+seqedit, sequence=LHCB1;
+flatten;
+cycle, start=BPMWB.4L1.B1;
+endedit;
+
+use, period = LHCB1;
+
+option, echo;
+
+twiss;
+
+exec, save_initial_and_final_values(
+    LHCB1,
+    BPMWB.4L1.B1,
+    BPMS.2R1.B1,
+    "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//measurement_IP1.madx",
+    biniLHCB1,
+    bendLHCB1
+);
+
+exec, extract_segment_sequence(
+    LHCB1,
+    front_LHCB1, back_LHCB1,
+    BPMWB.4L1.B1, BPMS.2R1.B1
+);
+exec, beam_LHCB1(front_LHCB1);
+exec, beam_LHCB1(back_LHCB1);
+
+
+exec, twiss_segment(front_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//twiss_IP1.dat", biniLHCB1);
+exec, twiss_segment(back_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//twiss_IP1_back.dat", bendLHCB1);
+
+call, file="/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//corrections_IP1.madx";
+
+exec, twiss_segment(front_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//twiss_IP1_cor.dat", biniLHCB1);
+exec, twiss_segment(back_LHCB1, "/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_notcleaned/sbs_auto//twiss_IP1_cor_back.dat", bendLHCB1);

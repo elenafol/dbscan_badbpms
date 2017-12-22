@@ -1,0 +1,9 @@
+@ GetLLMVersion %s "V3.0.0 Dev"
+@ Command %s "/afs/cern.ch/work/o/omc/anaconda/bin/python '/afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/GetLLM.py' '--accel=LHCB1' '--model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat' '--files=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_addDbscan/Beam1@Turn@2017_09_11@19_02_33_250_addDbscan.sdds' '--output=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_dbscan_after_holeInOneCleaning' '--tbtana=SUSSIX' '--bpmu=mm' '--lhcphase=1' '--errordefs=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/error_deff.txt'"
+@ CWD %s "/home/efol/Workspaces/Accsoft-Eclipse-Pro/lhc-app-beta-beating"
+@ Date %s "21. December 2017, 14:03:12"
+# Calculates the kick from the model beta function
+@ FILES %s ""
+*             DPP                QX             QXRMS                QY             QYRMS             NATQX          NATQXRMS             NATQY          NATQYRMS           sqrt2JX        sqrt2JXSTD           sqrt2JY        sqrt2JYSTD               2JX            2JXSTD               2JY            2JYSTD
+$             %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le               %le
+              0.0    0.299853391212 1.89027751939e-07    0.331421650847 3.08942333271e-08    0.300042659236 1.91262309197e-06    0.325798379473  0.00237308655536   0.0348037846338   0.0169165142515   0.0366496051598  0.00682922028965  0.00121130342484  0.00117751743753  0.00134319355837  0.00050057645433

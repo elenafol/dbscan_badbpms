@@ -1,0 +1,22 @@
+2017-12-20#16-40-58:
+Name: GetLlm
+Command:
+/afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/GetLLM/GetLLM.py --accel=LHCB1 --model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat --files=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250/Beam1@Turn@2017_09_11@19_02_33_250.sdds --output=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned --tbtana=SUSSIX --bpmu=mm --lhcphase=1 --errordefs=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/error_deff.txt
+
+2017-12-20#16-41-19:
+Errors: Did not parse line ( "LHCB1$END" 23519.36962 0.3999991402 5.161352256e-06 0.3999855656 -2.551493119e-05 54.48172444 53.18831645 3.290403389e-07 0 2.109104239e-06 0 0 0 0 0 0 0 0 47.87975099 33.0951853 106.1509411 105.6578977 -3.858832908 6.500917874 "MARKER" 0 0 -0 -0 -0 -0 ) in  /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss_elements.dat
+Did not parse line ( "LHCB1$START" 23519.36962 0.3999991402 5.161352256e-06 0.3999855656 -2.551493119e-05 54.48172444 53.18831645 3.290403389e-07 0 2.109104239e-06 0 0 0 0 0 0 0 0 47.87975099 33.0951853 106.1509411 105.6578977 -3.858832908 6.500917874 "MARKER" 0 0 -0 -0 -0 -0 ) in  /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss_elements.dat
+/afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/linalg/linalg.py:1776: RuntimeWarning: invalid value encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+
+
+2017-12-20#16-41-19:
+Name: CorrectCoupleDy
+Command:
+/afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/Correction/correct_coupleDy.py --accel=LHCB1 --path=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_cleaned --cut=0.01 --errorcut=0.02,0.02 --modelcut=0.0,0.01 --rpath=/afs/cern.ch/work/e/efol/public/Beta-Beat.src/ --MinStr=0.000001 --Dy=1,1,0,0,0 --opt=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/ --Variables=coupling_knobs
+
+2017-12-20#16-41-20:
+Errors: /afs/cern.ch/work/o/omc/anaconda/lib/python2.7/site-packages/numpy/linalg/linalg.py:1776: RuntimeWarning: invalid value encountered in det
+  r = _umath_linalg.det(a, signature=signature)
+
+

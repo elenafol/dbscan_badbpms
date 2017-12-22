@@ -1,0 +1,14 @@
+__main__ - DEBUG - /afs/cern.ch/work/o/omc/anaconda/bin/python /afs/cern.ch/work/e/efol/public/Beta-Beat.src/hole_in_one/hole_in_one.py --file=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds --model=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat --outputdir=/afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned harpy --harpy_mode=bpm --tunex=0.3 --tuney=0.332 --nattunex=0.310 --nattuney=0.320 --tunez=0.0 --tolerance=0.01 --no_tune_clean
+Utilities.tfs_pandas - DEBUG - Reading path: /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/models/LHCB1/Multiturn-model_40cm_2041/twiss.dat
+Utilities.tfs_pandas - DEBUG - Setting column names.
+Utilities.tfs_pandas - DEBUG - Setting column types.
+__main__ - DEBUG - Time for orbit_analysis: 0.0874600410461
+__main__ - DEBUG - Time for orbit_analysis: 0.0722839832306
+__main__ - DEBUG - Time for harmonic_analysis: 1.09672546387e-05
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.linx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.ampsx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.freqsx in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.liny in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.ampsy in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+Utilities.tfs_pandas - DEBUG - Attempting to write file: Beam1@Turn@2017_09_11@19_02_33_250_notcleaned.sdds.freqsy in /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Measurements/Beam1@Turn@2017_09_11@19_02_33_250_notcleaned
+__main__ - INFO - Total time for file: 109.396327972

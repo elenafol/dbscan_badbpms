@@ -1,0 +1,7 @@
+@ APP %le 0
+@ PATH %s /afs/cern.ch/work/e/efol/public/betabeatGui/temp/2017-12-20/LHCB1/Results/40cm_dbscanOnCleanedData
+@ DATE %s Thu Dec 21 14:57:47 2017
+* NAME DELTA
+$ %s %le
+b1_re_ip7_knob   -0.00143629634241
+b1_im_ip7_knob   -0.00162317697982
