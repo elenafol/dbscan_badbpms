@@ -35,7 +35,7 @@ LOGGER = logging.getLogger(__name__)
 WANTED_COLS_X = ["PK2PK", "TUNEX", "AMPX", "PH_ADV", "PH_ADV_BEAT", "PH_ADV_MDL", "BETX"]
 
 
-def get_common_bad_bpms(files, twiss):
+def get_common_bad_bpms_kmeans(files, twiss):
     common_bad_bpms = []
     all_data = []
     files_list = files.split(',')
@@ -55,6 +55,32 @@ def get_common_bad_bpms(files, twiss):
         outfile.write("\n".join(common_bad_bpms))
     _plot_bad_bpms_ph(all_data, common_bad_bpms)
     return common_bad_bpms
+
+
+def get_bad_bpms(algorithm, files, twiss, eps, minSamples):
+    bad_bpms = []
+    files_list = files.split(',')
+    for file_in in files_list:
+        bpm_tfs_data = _create_columns(file_in, twiss)
+        arc_bpm_data_for_clustering, ir_bpm_data_for_clustering = get_data_for_clustering(bpm_tfs_data)
+        if algorithm == "dbscan":
+            labels_from_arcs = _dbscan_clustering_noise(arc_bpm_data_for_clustering, eps, minSamples)
+            bad_in_arcs_from_file = arc_bpm_data_for_clustering.iloc[np.where(labels_from_arcs == -1)]
+            #eps and MinSamples for IRs?
+            labels_from_irs = _dbscan_clustering_noise(arc_bpm_data_for_clustering, 0.7, 20)
+            bad_in_irs_from_file = arc_bpm_data_for_clustering.iloc[np.where(labels_from_arcs == -1)]
+
+
+def get_data_for_clustering(bpm_tfs_data):
+    ir_bpm_data_for_clustering = bpm_tfs_data.iloc[~lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)]
+    ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
+    ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
+    ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    arc_bpm_data_for_clustering = bpm_tfs_data.iloc[lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)]
+    arc_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "TUNEX"])
+    arc_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "AMPX"])
+    arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    return ir_bpm_data_for_clustering, arc_bpm_data_for_clustering
 
 
 def _plot_bad_bpms_ph(all_data, bad_bpm_names):
@@ -80,7 +106,7 @@ def get_all_bad_bpms(files, twiss):
     return all_data, bad_bpms
     
 
-def clustering(file, twiss, eps, minSamples):
+def clustering(algorithm, file, twiss, eps, minSamples):
     #read bpm data
     bpm_tfs_data = _create_columns(file, twiss)
 
@@ -90,6 +116,8 @@ def clustering(file, twiss, eps, minSamples):
     ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
     ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
     ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    
+    
     ir_tune_ph = ir_bpm_data_for_clustering[["TUNEX", "PH_ADV_BEAT"]].copy()
     ir_tune_amp = ir_bpm_data_for_clustering[["TUNEX", "AMPX"]].copy()
     ir_ph_amp = ir_bpm_data_for_clustering[["PH_ADV_BEAT", "AMPX"]].copy()
@@ -134,7 +162,6 @@ def clustering(file, twiss, eps, minSamples):
     arc_tune_ph = arc_bpm_data_for_clustering[["TUNEX", "PH_ADV_BEAT"]].copy()
     arc_tune_amp = arc_bpm_data_for_clustering[["TUNEX", "AMPX"]].copy()
     arc_ph_amp = arc_bpm_data_for_clustering[["PH_ADV_BEAT", "AMPX"]].copy()
-    #labels_from_arcs = _dbscan_clustering_noise(arc_bpm_data_for_clustering, eps, minSamples)
     labels_arcs_kmeans_tune_ph = _kmeans_clustering(arc_tune_ph, 3, 100, "PH_ADV_BEAT", "TUNEX")
     labels_arcs_kmeans_tune_amp = _kmeans_clustering(arc_tune_amp, 3, 100, "TUNEX", "AMPX")
     labels_arcs_kmeans_ph_amp = _kmeans_clustering(arc_ph_amp, 3, 100, "PH_ADV_BEAT", "AMPX" )
@@ -167,14 +194,7 @@ def clustering(file, twiss, eps, minSamples):
         print(arc_bpm_data_for_clustering.loc[bpm, "TUNEX"])
         print(arc_bpm_data_for_clustering.loc[bpm, "AMPX"])
 
-    #ir_data_std_normalized = _get_standard_score_normalization(noise_samples_second_itr)
-    #foc_data_std_normalized = _get_standard_score_normalization(cluster1_samples_second_itr)
-    #defoc_data_std_normalized = _get_standard_score_normalization(cluster2_samples_second_itr)
-
     return bpm_tfs_data, bad_in_irs_kmeans, bad_in_arcs_kmeans
-
-    #For dbscan
-    #bad_in_arcs = data_for_clustering.iloc[np.where(labels_from_arcs == -1)]
 
 
 def _get_bad_clusters_from_dataset(data, labels, limit):
@@ -419,5 +439,5 @@ def _parse_args():
 if __name__ == "__main__":
     _files, _twiss, _eps, _minSamples = _parse_args()
     #get_all_bad_bpms(_files, _twiss)
-    get_common_bad_bpms(_files, _twiss)
+    get_common_bad_bpms_kmeans(_files, _twiss)
     #clustering(_file, _twiss, _eps, _minSamples)
