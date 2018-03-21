@@ -17,6 +17,7 @@ from sklearn.neighbors import DistanceMetric
 from scipy.spatial import distance
 from sklearn.cluster import KMeans
 import mpl_toolkits.mplot3d.axes3d as p3
+import matplotlib.animation
 
 import argparse
 #from mock.mock import inplace
@@ -152,7 +153,7 @@ def get_bad_bmps_from_dbscan(files, twiss, eps, minSamples, plane):
         print(len(arc_bpm_data_for_clustering), len(ir_bpm_data_for_clustering))
         labels_from_arcs = _dbscan_clustering_noise(arc_bpm_data_for_clustering, eps, minSamples)
         bad_in_arcs_from_file = arc_bpm_data_for_clustering.iloc[np.where(labels_from_arcs == -1)].index
-        labels_from_irs = _dbscan_clustering_noise(ir_bpm_data_for_clustering, 0.3, 70)
+        labels_from_irs = _dbscan_clustering_noise(ir_bpm_data_for_clustering, 0.6, 190)
         bad_in_irs_from_file = ir_bpm_data_for_clustering.iloc[np.where(labels_from_irs == -1)].index
         print("---Bad BPMs from single file---")
         for bpm in list(bad_in_arcs_from_file)+list(bad_in_irs_from_file):
@@ -392,16 +393,16 @@ def multid_plotting(data_features, core_samples_mask, labels):
     unique_labels = set(labels)
     for l, col in zip(unique_labels, COLORS):
         if l == -1:
-            col = "black"
+            col = "red"
         class_member_mask = (labels == l)
         this_class_core_mask = class_member_mask & core_samples_mask
         this_class_non_core_mask = class_member_mask & ~core_samples_mask
         core_points = data_features.iloc[this_class_core_mask]
         non_core_points = data_features.iloc[this_class_non_core_mask]
         ax.plot3D(core_points.loc[:, "TUNEX"], core_points.loc[:, "AMPX"], core_points.loc[:, "PH_ADV_BEAT"], 'o', markerfacecolor=col,
-                      markeredgecolor='k', markersize=14, label = "Core samples $C_{" + str(l+1) +"}$" if l != -1 else "")
-        ax.plot3D(non_core_points.loc[:, "TUNEX"], non_core_points.loc[:, "AMPX"], non_core_points.loc[:, "PH_ADV_BEAT"], 'o' if l == -1 else 's', markerfacecolor=col,
-                      markeredgecolor='k', markersize=6, label = "Noise" if l == -1 else "Non core samples $C_{" + str(l+1) +"}$")
+                      markeredgecolor='k', markersize=14, label = "Core samples" if l != -1 else "")
+        ax.plot3D(non_core_points.loc[:, "TUNEX"], non_core_points.loc[:, "AMPX"], non_core_points.loc[:, "PH_ADV_BEAT"], "^" if l == -1 else 's', markerfacecolor=col,
+                      markeredgecolor='k', markersize=14 if l == -1 else 6, label = "Noise" if l == -1 else "Non core samples")
         #ax.plot3D(data_features[labels == l, 0], data_features[labels == l, 1], data_features[labels == l, 2],
         #               'o', color=plt.cm.jet(np.float(l) / np.max(labels + 1)) if l != -1 else 'black', label = "Core samples $C_{" + str(l+1) +"}$" if l != -1 else "Noise")
     ax.set_xlabel('Tune', fontsize = 25, linespacing=3.2)
@@ -420,7 +421,7 @@ def _plotting(data_features, core_samples_mask, labels, xcolumn, ycolumn):
     unique_labels = set(labels)
     for k, col in zip(unique_labels, COLORS[:len(unique_labels)]):
         if k == -1:  # Is noise
-            col = "black"
+            col = "red"
 
         class_member_mask = (labels == k)
         this_class_core_mask = class_member_mask & core_samples_mask
@@ -435,20 +436,20 @@ def _plotting(data_features, core_samples_mask, labels, xcolumn, ycolumn):
             markerfacecolor=col,
             markeredgecolor='k',
             markersize=14,
-            label = "Core samples $C_{" + str(k+1) +"}$" if k != -1 else "",
+            label = "Core samples" if k != -1 else "",
         )
         plt.plot(
             non_core_points.loc[:, xcolumn],
             non_core_points.loc[:, ycolumn],
-            'o' if k == -1 else 's',
+            "^" if k == -1 else 's',
             markerfacecolor=col,
             markeredgecolor='k',
-            markersize=6,
-            label = "Noise" if k == -1 else "Non core samples $C_{" + str(k+1) +"}$",
+            markersize=14 if k == -1 else 6,
+            label = "Noise" if k == -1 else "Non core samples",
         )
 
-    plt.xlabel(xcolumn, fontsize = 25)    
-    plt.ylabel(ycolumn,fontsize = 25)
+    plt.xlabel('Phase advance beating', fontsize = 25)    
+    plt.ylabel('Tune',fontsize = 25)
     plt.xticks(fontsize = 25)
     plt.yticks(fontsize = 25)
     plt.legend(fontsize = 25)
