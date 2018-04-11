@@ -176,7 +176,7 @@ def get_bad_bpms_from_lof(files_x, twiss, plane):
 #         elif plane == "y":
 #             needed_columns = needed_columns_y        
         arc_bpm_data_for_clustering, ir_bpm_data_for_clustering = get_data_for_clustering(needed_columns)
-        lof_arcs = LocalOutlierFactor(n_neighbors=38, metric='minkowski', p=2, contamination=0.1)
+        lof_arcs = LocalOutlierFactor(n_neighbors=38, metric='minkowski', p=2, contamination=0.05)
         lof_irs = LocalOutlierFactor(n_neighbors=27, metric='minkowski', p=2, contamination=0.05)
         labels_from_arcs = lof_arcs.fit_predict(arc_bpm_data_for_clustering)
         labels_from_irs = lof_irs.fit_predict(ir_bpm_data_for_clustering)
@@ -188,7 +188,6 @@ def get_bad_bpms_from_lof(files_x, twiss, plane):
 #         print(os.path.abspath(file_in))
         bad_bpms_in_file = bad_in_arcs_from_file + bad_in_irs_from_file
 
-        #remove_bpms_from_file(file_in, bad_bpms_in_file.index)
         #plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"TUNEX", "PH_ADV_BEAT")
         #plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"AMPX", "PH_ADV_BEAT")
         if len(all_bad_arcs) == 0:
@@ -206,15 +205,14 @@ def get_bad_bpms_from_lof(files_x, twiss, plane):
                                           intersection(bad_in_arcs_from_file).
                                           intersection(bad_in_irs_from_file)))
     all_bad_from_lof = all_bad_arcs + all_bad_irs
-    
     good_in_arcs = arc_bpm_data_for_clustering[~arc_bpm_data_for_clustering.isin(all_bad_arcs)]
     good_in_irs = ir_bpm_data_for_clustering[~ir_bpm_data_for_clustering.isin(all_bad_irs)]
     print(len(np.unique(all_bad_from_lof.index)))
     for index in np.unique(all_bad_from_lof.index):
         print_significant_feature(index, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
     #check_bpm("BPM.12R1.B1", arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
-    for file_in in files_x:
-        remove_bpms_from_file(file_in, np.unique(all_bad_from_lof.index))
+#     for file_in in files_x:
+#         remove_bpms_from_file(file_in, np.unique(all_bad_from_lof.index))
     return common_bad_bpms_lof, all_bad_from_lof
 
 
@@ -269,17 +267,19 @@ def print_significant_feature(index, all_arcs, all_irs, good_in_arcs, good_in_ir
 def get_bad_bpms_from_forest(files_x, twiss, plane):
     common_bad_bpms_forest = []
     all_bad_from_forest = []
+    all_bad_arcs = []
+    all_bad_irs = []
     for file_in in files_x:
         bpm_tfs_data = _create_columns(file_in, twiss)
-        needed_columns_x = bpm_tfs_data[["TUNEX", "PH_ADV_BEAT", "AMPX"]].copy()
+        needed_columns_x = bpm_tfs_data[["S","TUNEX", "PH_ADV_BEAT", "AMPX"]].copy()
         #needed_columns_y = bpm_tfs_data[["TUNEY", "PH_ADV_BEAT", "AMPY"]].copy()
         if plane == "x":
             needed_columns = needed_columns_x
 #         elif plane == "y":
-#             needed_columns = needed_columns_y        
+#             needed_columns = needed_columns_y
         arc_bpm_data_for_clustering, ir_bpm_data_for_clustering = get_data_for_clustering(needed_columns)
-        forest_arcs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, max_features=1.0, bootstrap=True)
-        forest_irs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.1, max_features=1.0, bootstrap=True)
+        forest_arcs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.05, max_features=1.0, bootstrap=False)
+        forest_irs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.05, max_features=1.0, bootstrap=False)
         forest_arcs.fit(arc_bpm_data_for_clustering)
         forest_irs.fit(ir_bpm_data_for_clustering)
         labels_from_arcs = forest_arcs.predict(arc_bpm_data_for_clustering)
@@ -288,36 +288,37 @@ def get_bad_bpms_from_forest(files_x, twiss, plane):
         bad_in_irs_from_file = ir_bpm_data_for_clustering.iloc[np.where(labels_from_irs == -1)]
         good_in_arcs_from_file = arc_bpm_data_for_clustering.iloc[np.where(labels_from_arcs != -1)]
         good_in_irs_from_file = ir_bpm_data_for_clustering.iloc[np.where(labels_from_irs != -1)]
-        print("Bad BPMs in the arcs:")
-        for index in bad_in_arcs_from_file.index:
-            print(index)
-        print("Bad BPMs in IRs:")
-        for index in bad_in_irs_from_file.index:
-            print(index)
-        print(os.path.abspath(file_in))
+
         bad_bpms_in_file = bad_in_arcs_from_file + bad_in_irs_from_file
-        #n_neighbors=1 to find the closes point to a bad bpm
-#        arcs_neighbors = NearestNeighbors(n_neighbors=1, algorithm='ball_tree')
-#        dist, ind = arcs_neighbors.fit(arc_bpm_data_for_clustering)
-        #print(ind)
-#         for bad_bpm in bad_in_arcs_from_file:
-#             print(bad_bpm.index)
-#             print(arcs_neighbors.kneighbors(bad_bpm))
-        remove_bpms_from_file(file_in, bad_bpms_in_file.index)
-#         plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"TUNEX", "PH_ADV_BEAT")
-#         plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"AMPX", "PH_ADV_BEAT")
-        if len(all_bad_from_forest) == 0:
-            all_bad_from_forest = bad_in_arcs_from_file + bad_in_irs_from_file
+        plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"TUNEX", "PH_ADV_BEAT")
+        plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"AMPX", "PH_ADV_BEAT")
+        multid_plotting(good_in_arcs_from_file, bad_in_arcs_from_file, os.path.basename(file_in) + ":   ARSc")
+        multid_plotting(good_in_irs_from_file, bad_in_irs_from_file, os.path.basename(file_in) + ":   IRs")
+        if len(all_bad_arcs) == 0:
+            all_bad_arcs = bad_in_arcs_from_file
         else:
-            all_bad_from_forest = all_bad_from_forest + bad_in_arcs_from_file + bad_in_irs_from_file
+            all_bad_arcs = all_bad_arcs + bad_in_arcs_from_file
+        if len(all_bad_irs) == 0:
+            all_bad_irs = bad_in_irs_from_file
+        else:
+            all_bad_irs = all_bad_irs + bad_in_irs_from_file
         if len(common_bad_bpms_forest) == 0:
-            common_bad_bpms_forest = list(common_bad_bpms_forest) + list(bad_in_irs_from_file)
+            common_bad_bpms_forest = list(bad_in_arcs_from_file) + list(bad_in_irs_from_file)
         else:
             common_bad_bpms_forest = (list(set(common_bad_bpms_forest).
                                           intersection(bad_in_arcs_from_file).
                                           intersection(bad_in_irs_from_file)))
-#     print("Number of BPMs all bad bpms:")
-#     print(len(all_bad_from_lof))
+    all_bad_from_forest = all_bad_arcs + all_bad_irs
+    good_in_arcs = arc_bpm_data_for_clustering[~arc_bpm_data_for_clustering.isin(all_bad_arcs)]
+    good_in_irs = ir_bpm_data_for_clustering[~ir_bpm_data_for_clustering.isin(all_bad_irs)]
+    print(len(np.unique(all_bad_from_forest.index)))
+    for index in np.unique(all_bad_from_forest.index):
+        print_significant_feature(index, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
+    print("Checking potentially wrong remodev BPMs.....")
+    check_bpm("BPM.30R2.B1", arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
+    check_bpm("BPM.31R2.B1", arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
+#     for file_in in files_x:
+#         remove_bpms_from_file(file_in, np.unique(all_bad_from_forest.index))
     return common_bad_bpms_forest, all_bad_from_forest
 
 
@@ -340,6 +341,8 @@ def plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from
         markersize=10,
         label = "Bad",
     )
+    for index in bad_in_arcs_from_file.index:
+        plt.annotate(index, xy=(bad_in_arcs_from_file.loc[index, col1], bad_in_arcs_from_file.loc[index, col2]))
     plt.xlabel(col1, fontsize = 25)
     plt.ylabel(col2,fontsize = 25)
     plt.xticks(fontsize = 25)
@@ -366,6 +369,8 @@ def plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from
         markersize=10,
         label = "Bad",
     )
+    for index in bad_in_irs_from_file.index:
+        plt.annotate(index, xy=(bad_in_irs_from_file.loc[index, col1], bad_in_irs_from_file.loc[index, col2]))
     plt.xlabel(col1, fontsize = 25)
     plt.ylabel(col2,fontsize = 25)
     plt.xticks(fontsize = 25)
@@ -375,96 +380,29 @@ def plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from
     plt.show()
 
 
+def multid_plotting(good_bpms, bad_bpms, title):
+    plt.figure()
+    fig = plt.figure()
+    ax = p3.Axes3D(fig)
+    ax.plot3D(good_bpms.loc[:, "TUNEX"], good_bpms.loc[:, "AMPX"], good_bpms.loc[:, "PH_ADV_BEAT"], 'o', markerfacecolor="black",
+                      markeredgecolor='black', markersize=14)
+    ax.plot3D(bad_bpms.loc[:, "TUNEX"], bad_bpms.loc[:, "AMPX"], bad_bpms.loc[:, "PH_ADV_BEAT"], '^', markerfacecolor="red",
+                      markeredgecolor='black', markersize=14)
+    for index in bad_bpms.index:
+        ax.text(bad_bpms.loc[index, "TUNEX"], bad_bpms.loc[index, "AMPX"], bad_bpms.loc[index, "PH_ADV_BEAT"], index)
+    ax.set_title(title)
+    ax.set_xlabel('Tune', fontsize = 25, linespacing=3.2)
+    ax.set_ylabel('Amplitude', fontsize = 25, linespacing=3.2)
+    ax.set_zlabel('Phase advance beating', fontsize = 25, linespacing=3.2)
+    ax.tick_params(axis='x', labelsize=15)
+    ax.tick_params(axis='y', labelsize=15)
+    ax.tick_params(axis='z', labelsize=15)
 
-def get_data_for_clustering(bpm_tfs_data):
-    ir_bpm_data_for_clustering = bpm_tfs_data.iloc[~lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)]
-    ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
-    ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
-    ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
-    arc_bpm_data_for_clustering = bpm_tfs_data.iloc[lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)] 
-    arc_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "TUNEX"])
-    arc_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "AMPX"])
-    arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
-    return arc_bpm_data_for_clustering, ir_bpm_data_for_clustering
-
-
-def _plot_bad_bpms_ph(all_data, bad_bpm_names):
-    bpms_to_plot = all_data.iloc[bad_bpm_names, :]
-    bpms_to_plot.PH_ADV_BEAT.plot()
-    plt.title("Phase advance beating")
+    plt.legend(fontsize = 25)
     plt.show()
-    
-    
-def _get_bad_clusters_from_dataset(data, labels, limit):
-    bad_bpms = []
-    unique_labels = set(labels)
-    for label in unique_labels:
-        count_bpms_in_cluster = bpms_with_label(data, labels, label)
-        if count_bpms_in_cluster < limit:
-            bad_bpms.append(data.iloc[np.where(labels == label)].index)
-    if len(bad_bpms) == 0:
-        return []
-    return bad_bpms[0]
 
 
-def bpms_with_label(data, labels, label):
-    bpms_with_label = data.iloc[np.where(labels == label)]
-    return bpms_with_label.shape[0]
-
-
-def _weighted_feature(data, feature, weight):
-    column_data = data.loc[:, feature]
-    weighted_column_data = column_data * weight
-    data.loc[:, feature] = weighted_column_data
-
-
-def _max_distance(data_features, data_point):
-    distances = []
-    #average of data features per column
-    for column in data_features.columns:
-        column_mean = data_features[column].mean()
-        distances.append(distance.mahalanobis(column_mean, data_point[column], np.cov(data_point)))
-                         #(column_mean, data_point[column]))
-    all_distances = pandas.DataFrame(distances, data_features.columns)
-    #print("###Maximum distance###")
-    #print(all_distances.max(axis=1))
-    #all_distances.transpose()
-    indx = all_distances.idxmax()
-    #print(all_distances.idxmax())
-    print(data_point[indx])
-    
-
-    #feature_with_max_dst = all_distances.idxmax(axis=1)
-    #print(feature_with_max_dst)
-    #print(all_distances[feature_with_max_dst])
-    #print('###########') 
-    
-
-def _dbscan_clustering_regions(data, eps, minSamples):
-    db = DBSCAN(eps=eps, min_samples=minSamples, metric='mahalanobis', metric_params={'V': np.cov(data)}, 
-                        algorithm='brute', leaf_size=30, p=None, n_jobs=-1)
-    prediction = db.fit(data)
-    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
-    core_samples_mask[db.core_sample_indices_] = True
-    labels = db.labels_
-    _plotting(data, core_samples_mask, labels, "PH_ADV_MDL", "BETX")
-   
-    return labels
-
-def _dbscan_clustering_noise(data, eps, minSamples):
-    #mahalanobis_metric = DistanceMetric.get_metric('mahalanobis', V=np.cov(data))
-    db = DBSCAN(eps=eps, min_samples=minSamples, metric='euclidean', 
-                        algorithm='brute', leaf_size=30, p=None, n_jobs=-1)
-    prediction = db.fit(data)
-    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
-    core_samples_mask[db.core_sample_indices_] = True
-    labels = db.labels_
-    _plotting(data, core_samples_mask, labels, "PH_ADV_BEAT", "TUNEX")
-    multid_plotting(data, core_samples_mask, labels)
-    return labels
-
-
-def multid_plotting(data_features, core_samples_mask, labels):
+def multid_plotting_dbscan(data_features, core_samples_mask, labels):
     plt.figure()
     fig = plt.figure()
     ax = p3.Axes3D(fig)
@@ -493,9 +431,10 @@ def multid_plotting(data_features, core_samples_mask, labels):
     plt.legend(fontsize = 25)
     plt.show()
 
+
 #plotting for dbscan
 COLORS = ("blue", "red", "green", "yellow", "pink", "black", "orange")
-def _plotting(data_features, core_samples_mask, labels, xcolumn, ycolumn):
+def _plotting_dbscan(data_features, core_samples_mask, labels, xcolumn, ycolumn):
     print(data_features.columns)
     unique_labels = set(labels)
     for k, col in zip(unique_labels, COLORS[:len(unique_labels)]):
@@ -549,6 +488,38 @@ def _plot_beta_function(twiss, data_features, labels):
             'o',
             markerfacecolor=col)
     plt.show()
+
+def get_data_for_clustering(bpm_tfs_data):
+    ir_bpm_data_for_clustering = bpm_tfs_data.iloc[~lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)]
+    ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
+    ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
+    ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    ir_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "S"])*4
+    arc_bpm_data_for_clustering = bpm_tfs_data.iloc[lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)] 
+    arc_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "TUNEX"])
+    arc_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "AMPX"])
+    arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    arc_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "S"])*4
+    return arc_bpm_data_for_clustering, ir_bpm_data_for_clustering
+
+
+def _weighted_feature(data, feature, weight):
+    column_data = data.loc[:, feature]
+    weighted_column_data = column_data * weight
+    data.loc[:, feature] = weighted_column_data
+
+
+def _dbscan_clustering_noise(data, eps, minSamples):
+    #mahalanobis_metric = DistanceMetric.get_metric('mahalanobis', V=np.cov(data))
+    db = DBSCAN(eps=eps, min_samples=minSamples, metric='euclidean', 
+                        algorithm='brute', leaf_size=30, p=None, n_jobs=-1)
+    prediction = db.fit(data)
+    core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
+    core_samples_mask[db.core_sample_indices_] = True
+    labels = db.labels_
+    _plotting_dbscan(data, core_samples_mask, labels, "PH_ADV_BEAT", "TUNEX")
+    multid_plotting_dbscan(data, core_samples_mask, labels)
+    return labels
 
 
 def _create_columns(file, twiss):
