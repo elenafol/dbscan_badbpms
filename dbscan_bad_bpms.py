@@ -266,7 +266,7 @@ def get_bad_bpms_from_forest(files_x, twiss, plane):
     all_bad_irs = []
     for file_in in files_x:
         bpm_tfs_data = _create_columns(file_in, twiss)
-        needed_columns_x = bpm_tfs_data[["S","TUNEX", "PH_ADV_BEAT", "AMPX", "NOISE"]].copy()
+        needed_columns_x = bpm_tfs_data[["S","TUNEX", "PH_ADV_BEAT", "AMPX"]].copy()
         #needed_columns_y = bpm_tfs_data[["TUNEY", "PH_ADV_BEAT", "AMPY"]].copy()
         if plane == "x":
             needed_columns = needed_columns_x
@@ -497,13 +497,13 @@ def get_data_for_clustering(bpm_tfs_data):
     ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
     ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
     ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
-    ir_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "NOISE"])
+    #ir_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "NOISE"])
     ir_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "S"])*4
     arc_bpm_data_for_clustering = bpm_tfs_data.iloc[lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)] 
     arc_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "TUNEX"])
     arc_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "AMPX"])
     arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
-    arc_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "NOISE"])
+    #arc_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "NOISE"])
     arc_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "S"])*4
     return arc_bpm_data_for_clustering, ir_bpm_data_for_clustering
 
