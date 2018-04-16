@@ -98,9 +98,9 @@ def get_bad_bpms(algorithm, files, twiss, eps, minSamples):
 #             print(index)
     if algorithm == "forest":
         common_bad_bpms_from_forest_x, all_bad_from_forest_x = get_bad_bpms_from_forest(files_x, twiss, "x")
-        print("---Random Forest: all bad BPMS in horizontal---")
-        for index in all_bad_from_forest_x.index:
-            print(index)
+#         print("---Random Forest: all bad BPMS in horizontal---")
+#         for index in all_bad_from_forest_x.index:
+#             print(index)
 #     outpath = os.path.abspath(os.path.join(os.path.dirname(files_list[0]), "..", "bad_bpms_clustering.txt"))
 #     print("Printing bad bpms to: {}".format(outpath))
 #     with open(outpath, "w") as outfile:
@@ -216,52 +216,47 @@ def get_bad_bpms_from_lof(files_x, twiss, plane):
     return common_bad_bpms_lof, all_bad_from_lof
 
 
-def check_bpm(index, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file):
+def check_bpm(index, bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file):
+    print(index + "---------------------------------------------------------------")
+    print("Averages (Tune, Phase, Amp)")
     if index in arc_bpm_data_for_clustering:
-        print("Avearages")
-        print(np.mean(good_in_arcs_from_file.TUNEX))
-        print(np.mean(good_in_arcs_from_file.PH_ADV_BEAT))
-        print(np.mean(good_in_arcs_from_file.AMPX))
-        print(index)
-        print(arc_bpm_data_for_clustering.loc[index, "TUNEX"])
-        print(arc_bpm_data_for_clustering.loc[index, "PH_ADV_BEAT"])
-        print(arc_bpm_data_for_clustering.loc[index, "AMPX"])
+        print(np.mean(bpm_tfs_data.loc[good_in_arcs_from_file.index]["TUNEX"]))
+        print(np.mean(bpm_tfs_data.loc[good_in_arcs_from_file.index]["PH_ADV_BEAT"]))
+        print(np.mean(bpm_tfs_data.loc[good_in_arcs_from_file.index]["AMPX"]))
     else:
-        print("Avearages")
-        print(np.mean(good_in_irs_from_file.TUNEX))
-        print(np.mean(good_in_irs_from_file.PH_ADV_BEAT))
-        print(np.mean(good_in_irs_from_file.AMPX))
-        print(index)
-        print(ir_bpm_data_for_clustering.loc[index, "TUNEX"])
-        print(ir_bpm_data_for_clustering.loc[index, "PH_ADV_BEAT"])
-        print(ir_bpm_data_for_clustering.loc[index, "AMPX"])
+        print(np.mean(bpm_tfs_data.loc[good_in_irs_from_file.index]["TUNEX"]))
+        print(np.mean(bpm_tfs_data.loc[good_in_irs_from_file.index]["PH_ADV_BEAT"]))
+        print(np.mean(bpm_tfs_data.loc[good_in_irs_from_file.index]["AMPX"]))
+    print(bpm_tfs_data.loc[index, "TUNEX"])
+    print(bpm_tfs_data.loc[index, "PH_ADV_BEAT"])
+    print(bpm_tfs_data.loc[index, "AMPX"])
 
 
-def print_significant_feature(index, all_arcs, all_irs, good_in_arcs, good_in_irs):
+def print_significant_feature(index, bpm_tfs_data, all_arcs, all_irs, good_in_arcs, good_in_irs):
     if index in all_arcs.index:
         print(index)
         max_dist = max(abs(all_arcs.loc[index, "TUNEX"]-np.mean(good_in_arcs.TUNEX)), abs(all_arcs.loc[index, "PH_ADV_BEAT"]-np.mean(good_in_arcs.PH_ADV_BEAT)),abs(all_arcs.loc[index, "AMPX"]-np.mean(good_in_arcs.AMPX)))
         if max_dist == abs(all_arcs.loc[index, "TUNEX"]-np.mean(good_in_arcs.TUNEX)):
             print("Significant feature: Tune")
-            print("mean: " + str(np.mean(good_in_arcs.TUNEX)) + " file: " + str(all_arcs.loc[index, "TUNEX"]))
+            print("mean: " + str(np.mean(good_in_arcs.TUNEX)) + " file: " + str(all_arcs.loc[index, "TUNEX"]) + " non-normalized: " + str(bpm_tfs_data.loc[index, "TUNEX"]) + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_arcs.index]["TUNEX"])))
         elif max_dist == abs(all_arcs.loc[index, "PH_ADV_BEAT"]-np.mean(good_in_arcs.PH_ADV_BEAT)):
             print("Significant feature: Phase advance beating")
-            print("mean: " + str(np.mean(good_in_arcs.PH_ADV_BEAT)) + " file: " + str(all_arcs.loc[index, "PH_ADV_BEAT"]))
+            print("mean: " + str(np.mean(good_in_arcs.PH_ADV_BEAT)) + " file: " + str(all_arcs.loc[index, "PH_ADV_BEAT"]) + " non-normalized: " + str(bpm_tfs_data.loc[index, "PH_ADV_BEAT"])  + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_arcs.index]["PH_ADV_BEAT"])))
         else:
             print("Significant feature: Amplitude")
-            print("mean: " + str(np.mean(good_in_arcs.AMPX)) + " file: " + str(all_arcs.loc[index, "AMPX"]))
+            print("mean: " + str(np.mean(good_in_arcs.AMPX)) + " file: " + str(all_arcs.loc[index, "AMPX"])  + " non-normalized: " + str(bpm_tfs_data.loc[index, "AMPX"])  + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_arcs.index]["AMPX"])))
     elif index in all_irs.index:
         print(index)
         max_dist = max(abs(all_irs.loc[index, "TUNEX"]-np.mean(good_in_irs.TUNEX)), abs(all_irs.loc[index, "PH_ADV_BEAT"]-np.mean(good_in_irs.PH_ADV_BEAT)),abs(all_irs.loc[index, "AMPX"]-np.mean(good_in_irs.AMPX)))
         if max_dist == abs(all_irs.loc[index, "TUNEX"]-np.mean(good_in_irs.TUNEX)):
             print("Significant feature: Tune")
-            print("mean: " + str(np.mean(good_in_irs.TUNEX)) + " file: " + str(all_irs.loc[index, "TUNEX"]))
+            print("mean: " + str(np.mean(good_in_irs.TUNEX)) + " file: " + str(all_irs.loc[index, "TUNEX"])  + " non-normalized: " + str(bpm_tfs_data.loc[index, "TUNEX"]) + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_irs.index]["TUNEX"])))
         elif max_dist == abs(all_irs.loc[index, "PH_ADV_BEAT"]-np.mean(good_in_irs.PH_ADV_BEAT)):
             print("Significant feature: Phase advance beating")
-            print("mean: " + str(np.mean(good_in_irs.PH_ADV_BEAT)) + " file: " + str(all_irs.loc[index, "PH_ADV_BEAT"]))
+            print("mean: " + str(np.mean(good_in_irs.PH_ADV_BEAT)) + " file: " + str(all_irs.loc[index, "PH_ADV_BEAT"])  + " non-normalized: " + str(bpm_tfs_data.loc[index, "PH_ADV_BEAT"])   + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_irs.index]["PH_ADV_BEAT"])))
         else:
             print("Significant feature: Amplitude")
-            print("mean: " + str(np.mean(good_in_irs.AMPX)) + " file: " + str(all_irs.loc[index, "AMPX"]))
+            print("mean: " + str(np.mean(good_in_irs.AMPX)) + " file: " + str(all_irs.loc[index, "AMPX"])   + " non-normalized: " + str(bpm_tfs_data.loc[index, "AMPX"])  + " avg: " + str(np.mean(bpm_tfs_data.loc[good_in_irs.index]["AMPX"])))
 
 
 def get_bad_bpms_from_forest(files_x, twiss, plane):
@@ -271,15 +266,15 @@ def get_bad_bpms_from_forest(files_x, twiss, plane):
     all_bad_irs = []
     for file_in in files_x:
         bpm_tfs_data = _create_columns(file_in, twiss)
-        needed_columns_x = bpm_tfs_data[["S","TUNEX", "PH_ADV_BEAT", "AMPX"]].copy()
+        needed_columns_x = bpm_tfs_data[["S","TUNEX", "PH_ADV_BEAT", "AMPX", "NOISE"]].copy()
         #needed_columns_y = bpm_tfs_data[["TUNEY", "PH_ADV_BEAT", "AMPY"]].copy()
         if plane == "x":
             needed_columns = needed_columns_x
 #         elif plane == "y":
 #             needed_columns = needed_columns_y
         arc_bpm_data_for_clustering, ir_bpm_data_for_clustering = get_data_for_clustering(needed_columns)
-        forest_arcs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.05, max_features=1.0, bootstrap=False)
-        forest_irs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.05, max_features=1.0, bootstrap=False)
+        forest_arcs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.025, max_features=1.0, bootstrap=False)
+        forest_irs = IsolationForest(n_estimators=100, max_samples='auto', contamination=0.075, max_features=1.0, bootstrap=False)
         forest_arcs.fit(arc_bpm_data_for_clustering)
         forest_irs.fit(ir_bpm_data_for_clustering)
         labels_from_arcs = forest_arcs.predict(arc_bpm_data_for_clustering)
@@ -290,10 +285,10 @@ def get_bad_bpms_from_forest(files_x, twiss, plane):
         good_in_irs_from_file = ir_bpm_data_for_clustering.iloc[np.where(labels_from_irs != -1)]
 
         bad_bpms_in_file = bad_in_arcs_from_file + bad_in_irs_from_file
-        plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"TUNEX", "PH_ADV_BEAT")
-        plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"AMPX", "PH_ADV_BEAT")
-        multid_plotting(good_in_arcs_from_file, bad_in_arcs_from_file, os.path.basename(file_in) + ":   ARSc")
-        multid_plotting(good_in_irs_from_file, bad_in_irs_from_file, os.path.basename(file_in) + ":   IRs")
+#         plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"TUNEX", "PH_ADV_BEAT")
+#         plot_two_dim(good_in_arcs_from_file, bad_in_arcs_from_file, good_in_irs_from_file, bad_in_irs_from_file,"AMPX", "PH_ADV_BEAT")
+#         multid_plotting(good_in_arcs_from_file, bad_in_arcs_from_file, os.path.basename(file_in) + ":   ARSc")
+#         multid_plotting(good_in_irs_from_file, bad_in_irs_from_file, os.path.basename(file_in) + ":   IRs")
         if len(all_bad_arcs) == 0:
             all_bad_arcs = bad_in_arcs_from_file
         else:
@@ -313,12 +308,20 @@ def get_bad_bpms_from_forest(files_x, twiss, plane):
     good_in_irs = ir_bpm_data_for_clustering[~ir_bpm_data_for_clustering.isin(all_bad_irs)]
     print(len(np.unique(all_bad_from_forest.index)))
     for index in np.unique(all_bad_from_forest.index):
-        print_significant_feature(index, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
-    print("Checking potentially wrong remodev BPMs.....")
-    check_bpm("BPM.30R2.B1", arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
-    check_bpm("BPM.31R2.B1", arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
-#     for file_in in files_x:
-#         remove_bpms_from_file(file_in, np.unique(all_bad_from_forest.index))
+        print_significant_feature(index, bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs, good_in_irs)
+#     check_bpm("BPM.5R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPM.5R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPMR.6R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPM.9R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPM_A.7R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPM.8R8.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPM.10R8.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPMYA.4R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPMYA.4L5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPMWB.4L5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+#     check_bpm("BPMSY.4R5.B1", bpm_tfs_data, arc_bpm_data_for_clustering, ir_bpm_data_for_clustering, good_in_arcs_from_file, good_in_irs_from_file)
+    for file_in in files_x:
+        remove_bpms_from_file(file_in, np.unique(all_bad_from_forest.index))
     return common_bad_bpms_forest, all_bad_from_forest
 
 
@@ -494,11 +497,13 @@ def get_data_for_clustering(bpm_tfs_data):
     ir_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "TUNEX"])
     ir_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "AMPX"])
     ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    ir_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "NOISE"])
     ir_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(ir_bpm_data_for_clustering.loc[:, "S"])*4
     arc_bpm_data_for_clustering = bpm_tfs_data.iloc[lhc.Lhc.get_arc_bpms_mask(bpm_tfs_data.index)] 
     arc_bpm_data_for_clustering.loc[:, "TUNEX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "TUNEX"])
     arc_bpm_data_for_clustering.loc[:, "AMPX"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "AMPX"])
     arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "PH_ADV_BEAT"])
+    arc_bpm_data_for_clustering.loc[:, "NOISE"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "NOISE"])
     arc_bpm_data_for_clustering.loc[:, "S"] = _normalize_parameter(arc_bpm_data_for_clustering.loc[:, "S"])*4
     return arc_bpm_data_for_clustering, ir_bpm_data_for_clustering
 
